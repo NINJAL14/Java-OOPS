@@ -1,0 +1,80 @@
+Theory: Interfaces and abstract classes are fundamental concepts in Object-Oriented Programming that enable abstraction and polymorphism. An interface defines a contract that implementing classes must follow, containing only method signatures without implementation. Abstract classes can contain both abstract methods (without implementation) and concrete methods (with implementation), and cannot be instantiated directly. This program demonstrates a multi-level hierarchy: Drawable interface provides the draw() method contract, Shape abstract class implements Drawable and provides common properties (colour) and abstract method (calculateArea()), and concrete classes Circle and Rectangle extend Shape and provide specific implementations. The super keyword is used to call parent class constructors for initialization. Polymorphism is demonstrated through parent class references holding child class objects, allowing method overriding and dynamic method dispatch. This design pattern promotes code reusability, maintainability, and follows the "program to interface" principle of software engineering.
+*/
+
+// Interface definition - defines contract for drawable objects
+interface Drawable {
+    void draw(); // Abstract method signature
+}
+
+// Abstract class Shape implementing Drawable interface
+abstract class Shape implements Drawable {
+    String colour; // Instance variable for shape colour
+    
+    // Constructor to initialize colour
+    Shape(String colour) {
+        this.colour = colour;
+    }
+    
+    // Abstract method - must be implemented by subclasses
+    abstract double calculateArea();
+}
+
+// Circle subclass extending Shape
+class Circle extends Shape {
+    double radius; // Instance variable for circle radius
+    
+    // Constructor to initialize colour and radius
+    Circle(String colour, double radius) {
+        super(colour); // Call parent class constructor
+        this.radius = radius;
+    }
+    
+    // Implementation of abstract method - calculates circle area
+    double calculateArea() {
+        return Math.PI * radius * radius; // Formula: π × r²
+    }
+    
+    // Implementation of interface method - draws circle
+    public void draw() {
+        System.out.println("Drawing a " + colour + " circle with radius " + radius);
+    }
+}
+
+// Rectangle subclass extending Shape
+class Rectangle extends Shape {
+    double length, breadth; // Instance variables for rectangle dimensions
+    
+    // Constructor to initialize colour, length, and breadth
+    Rectangle(String colour, double length, double breadth) {
+        super(colour); // Call parent class constructor
+        this.length = length;
+        this.breadth = breadth;
+    }
+    
+    // Implementation of abstract method - calculates rectangle area
+    double calculateArea() {
+        return length * breadth; // Formula: length × breadth
+    }
+    
+    // Implementation of interface method - draws rectangle
+    public void draw() {
+        System.out.println("Drawing a " + colour + " rectangle with length " + length + " and breadth " + breadth);
+    }
+}
+
+// Main class to test shape hierarchy and polymorphism
+public class Exp8a {
+    public static void main(String[] args) {
+        // Polymorphism - Shape reference holding Circle object
+        Shape circle = new Circle("Red", 5);
+        circle.draw(); // Calls Circle's draw() method
+        System.out.println("Area: " + circle.calculateArea()); // Calls Circle's calculateArea()
+        
+        System.out.println(); // Blank line for better output readability
+        
+        // Polymorphism - Shape reference holding Rectangle object
+        Shape rectangle = new Rectangle("Blue", 9, 6);
+        rectangle.draw(); // Calls Rectangle's draw() method
+        System.out.println("Area: " + rectangle.calculateArea()); // Calls Rectangle's calculateArea()
+    }
+}
