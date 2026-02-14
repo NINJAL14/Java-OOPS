@@ -1,0 +1,78 @@
+Theory: Java provides powerful input/output capabilities through the Scanner class for interactive programs. Employee salary calculation involves various components like basic salary, HRA (House Rent Allowance), DA (Dearness Allowance), and PF (Provident Fund). In this program, we calculate gross salary by adding allowances to basic salary and net salary by deducting PF from gross salary. The program also demonstrates the use of loops for handling multiple employees, conditional statements for comparisons, and string concatenation for formatted output. Java's primitive data types (int, double) and non-primitive types (String) are effectively utilized for storing different types of employee information.
+*/
+
+// Importing Scanner class
+import java.util.Scanner;
+
+//Creating a Java class 
+public class Exp1b {
+    public static void main(String[] args) {
+        //variable declarations
+        Scanner sc = new Scanner(System.in);//object of Scanner class created
+        System.out.println("Enter number of employees : ");
+        int count = sc.nextInt();
+        sc.nextLine();
+        
+        int empId;
+        double empbSal, annualSal = 0, hra = 0, da = 0, pf = 0, gmsal = 0, nmsal = 0, ansal = 0;
+        String empName;
+        
+        double maxAns = Double.MIN_VALUE;
+        double minAns = Double.MAX_VALUE;
+        
+        String maxEmp = "", minEmp = "";
+        
+        //loop to input details for multiple employees
+        for (int i = 1; i <= count; i++) {
+            System.out.println("Enter Employee Id :");
+            empId = sc.nextInt();
+            sc.nextLine();
+            System.out.println("Enter Employee Name :");
+            empName = sc.nextLine();
+            System.out.println("Enter Basic Salary :");
+            empbSal = sc.nextDouble();
+            sc.nextLine();
+            
+            //salary calculations if basic salary is valid
+            if (empbSal > 0) {
+                annualSal = 12 * empbSal;
+                hra = 0.2 * empbSal;  //HRA is 20% of basic salary
+                da = 0.1 * empbSal;   //DA is 10% of basic salary
+                pf = 0.12 * empbSal;  //PF is 12% of basic salary
+                gmsal = empbSal + hra + da;  //gross salary calculation
+                nmsal = gmsal - pf;   //net salary calculation
+                ansal = nmsal * 12;   //annual net salary calculation
+            }
+            
+            //finding employee with highest annual net salary
+            if (ansal > maxAns) {
+                maxAns = ansal;
+                maxEmp = empName + "(ID : " + empId + ")";
+            }
+            
+            //finding employee with lowest annual net salary
+            if (ansal < minAns) {
+                minAns = ansal;
+                minEmp = empName + "(ID : " + empId + ") ";
+            }
+            
+            //displaying employee details
+            System.out.println("---Employee Details---");
+            System.out.println("Employee ID : " + empId);
+            System.out.println("Employee Name : " + empName);
+            System.out.println("Basic Salary :" + empbSal);
+            System.out.println("Annual Basic Salary : " + annualSal);
+            System.out.println("HRA : " + hra);
+            System.out.println("DA : " + da);
+            System.out.println("PF : " + pf);
+            System.out.println("Gross Salary : " + gmsal);
+            System.out.println("Net Salary : " + nmsal);
+            System.out.println("Annual Salary : " + ansal);
+            System.out.println("------------------------");
+        }
+        
+        //displaying comparison results
+        System.out.println("Employee with Highest Annual Net Salary : " + maxEmp + " => Rs." + maxAns);
+        System.out.println("Employee with Lowest Annual Net Salary : " + minEmp + " => Rs." + minAns);
+    }
+}
