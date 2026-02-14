@@ -1,0 +1,236 @@
+Theory: JavaFX is a modern GUI toolkit for Java that provides a rich set of graphics and media packages for creating desktop applications. It follows the Model-View-Controller (MVC) design pattern where FXML files define the view (UI layout), controller classes handle user interactions, and the main application class manages the application lifecycle. FXML is an XML-based markup language for defining user interfaces declaratively, separating UI design from business logic. The @FXML annotation marks fields and methods that are referenced in the FXML file, enabling automatic injection of UI components. Event handling in JavaFX uses the observer pattern where UI controls trigger ActionEvents that are processed by controller methods. The Scene Graph is a hierarchical tree of nodes representing UI elements, with Stage as the top-level container and Scene containing the UI nodes. This calculator application demonstrates JavaFX application structure, FXML-based UI design, controller class implementation with event handlers, TextField for input/output, Button controls with onAction attributes, exception handling for division by zero and invalid input, and type conversion between String and Integer for arithmetic operations.
+*/
+
+// ========================================================================================
+// FILE 1: calculator.fxml
+// ========================================================================================
+/*
+FXML file - defines the visual layout of the calculator interface
+This XML-based file describes the UI components and their properties
+*/
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<!-- Root container: AnchorPane with dimensions 500x500 -->
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/25" 
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.function">
+   <children>
+      <!-- Input TextField for first number with default value 2 -->
+      <TextField fx:id="t1" layoutX="208.0" layoutY="119.0" text="2" />
+      
+      <!-- Input TextField for second number with default value 3 -->
+      <TextField fx:id="t2" layoutX="212.0" layoutY="162.0" text="3" />
+      
+      <!-- Labels for input fields -->
+      <Label layoutX="85.0" layoutY="123.0" text="Number1" />
+      <Label layoutX="85.0" layoutY="166.0" text="Number2" />
+      
+      <!-- Title Label with custom font size -->
+      <Label layoutX="222.0" layoutY="55.0" text="Calculator">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      
+      <!-- Addition Button and Result TextField -->
+      <Button fx:id="b1" layoutX="91.0" layoutY="207.0" mnemonicParsing="false" 
+              onAction="#addition" text="Add" />
+      <TextField fx:id="t3" layoutX="212.0" layoutY="201.0" />
+      
+      <!-- Subtraction Button and Result TextField -->
+      <Button layoutX="92.0" layoutY="258.0" mnemonicParsing="false" 
+              onAction="#subtraction" text="Sub" />
+      <TextField fx:id="t4" layoutX="212.0" layoutY="245.0" />
+      
+      <!-- Multiplication Button and Result TextField -->
+      <Button layoutX="92.0" layoutY="308.0" mnemonicParsing="false" 
+              onAction="#multiplication" text="Mul" />
+      <TextField fx:id="t5" layoutX="212.0" layoutY="295.0" />
+      
+      <!-- Division Button and Result TextField -->
+      <Button layoutX="93.0" layoutY="355.0" mnemonicParsing="false" 
+              onAction="#division" text="Div" />
+      <TextField fx:id="t6" layoutX="213.0" layoutY="355.0" />
+   </children>
+</AnchorPane>
+
+// ========================================================================================
+// FILE 2: function.java - Controller Class
+// ========================================================================================
+/*
+Controller class - handles user interactions and business logic
+Maps FXML UI components to Java code using @FXML annotation
+*/
+
+package application;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+
+// Controller class for calculator functionality
+public class function {
+    
+    // @FXML annotation links these fields to FXML components with matching fx:id
+    @FXML
+    private TextField t1; // First number input
+    
+    @FXML
+    private TextField t2; // Second number input
+    
+    @FXML
+    private TextField t3; // Addition result output
+    
+    @FXML
+    private TextField t4; // Subtraction result output
+    
+    @FXML
+    private TextField t5; // Multiplication result output
+    
+    @FXML
+    private TextField t6; // Division result output
+    
+    // Event handler for Addition button
+    public void addition(ActionEvent event) {
+        // Get source button and log click event
+        Button clickedButton = (Button) event.getSource();
+        System.out.println("You clicked: " + clickedButton.getText());
+        
+        // Variable declarations for arithmetic operation
+        int a, b, c;
+        
+        // Parse input values from TextFields
+        a = Integer.parseInt(t1.getText());
+        b = Integer.parseInt(t2.getText());
+        
+        // Perform addition
+        c = a + b;
+        
+        // Display result in output TextField
+        t3.setText(Integer.toString(c));
+    }
+    
+    // Event handler for Subtraction button
+    public void subtraction(ActionEvent event) {
+        // Get source button and log click event
+        Button clickedButton = (Button) event.getSource();
+        System.out.println("You clicked: " + clickedButton.getText());
+        
+        // Variable declarations for arithmetic operation
+        int a, b, c;
+        
+        // Parse input values from TextFields
+        a = Integer.parseInt(t1.getText());
+        b = Integer.parseInt(t2.getText());
+        
+        // Perform subtraction
+        c = a - b;
+        
+        // Display result in output TextField
+        t4.setText(Integer.toString(c));
+    }
+    
+    // Event handler for Multiplication button
+    public void multiplication(ActionEvent event) {
+        // Get source button and log click event
+        Button clickedButton = (Button) event.getSource();
+        System.out.println("You clicked: " + clickedButton.getText());
+        
+        // Variable declarations for arithmetic operation
+        int a, b, c;
+        
+        // Parse input values from TextFields
+        a = Integer.parseInt(t1.getText());
+        b = Integer.parseInt(t2.getText());
+        
+        // Perform multiplication
+        c = a * b;
+        
+        // Display result in output TextField
+        t5.setText(Integer.toString(c));
+    }
+    
+    // Event handler for Division button with exception handling
+    public void division(ActionEvent event) {
+        // Get source button and log click event
+        Button clickedButton = (Button) event.getSource();
+        System.out.println("You clicked: " + clickedButton.getText());
+        
+        try {
+            // Parse input values from TextFields
+            int a = Integer.parseInt(t1.getText());
+            int b = Integer.parseInt(t2.getText());
+            
+            // Check for division by zero
+            if (b == 0) {
+                t6.setText("Error: ÷0");
+            } else {
+                // Perform division
+                int c = a / b;
+                
+                // Display result in output TextField
+                t6.setText(String.valueOf(c));
+            }
+        } catch (NumberFormatException e) {
+            // Handle invalid input (non-numeric values)
+            t6.setText("Invalid Input");
+        }
+    }
+}
+
+// ========================================================================================
+// FILE 3: Main.java - Application Entry Point
+// ========================================================================================
+/*
+Main class - JavaFX application entry point
+Extends Application class and launches the GUI application
+*/
+
+package application;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+// Main application class extending JavaFX Application
+public class Main extends Application {
+    
+    // start() method - called when application is launched
+    @Override
+    public void start(Stage primaryStage) {
+        try {
+            // Load FXML file and create scene graph
+            Parent root = FXMLLoader.load(getClass().getResource("calculator.fxml"));
+            
+            // Create Scene with root node and dimensions 400x400
+            Scene scene = new Scene(root, 400, 400);
+            
+            // Load CSS stylesheet for styling (optional)
+            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+            
+            // Set scene to primary stage and display window
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Calculator Application");
+            primaryStage.show();
+            
+        } catch(Exception e) {
+            // Print stack trace if error occurs during initialization
+            e.printStackTrace();
+        }
+    }
+    
+    // main() method - application entry point
+    public static void main(String[] args) {
+        // Launch JavaFX application
+        launch(args);
+    }
+}
