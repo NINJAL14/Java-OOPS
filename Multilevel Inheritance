@@ -1,0 +1,44 @@
+Theory:
+Multilevel inheritance in Java occurs when a class is derived from a class that is 
+already derived from another class. This forms a chain of inheritance.  
+
+In this program:  
+- The `Vehicle` class is the parent class with a method `showSpeed()`.  
+- The `Car` class extends `Vehicle` and overrides `showSpeed()`, while still 
+  calling the parent method using `super`.  
+- The `SportsCar` class extends `Car` and further overrides `showSpeed()`.  
+- This demonstrates how each subclass can build upon the functionality of its parent class.  
+*/
+
+// Parent class
+class Vehicle {
+    void showSpeed() {
+        System.out.println("Speed of Vehicle is: 67 km/h");
+    }    
+}
+
+// Child class (inherits Vehicle)
+class Car extends Vehicle {
+    @Override
+    void showSpeed() {
+        super.showSpeed(); // Call Vehicle's method
+        System.out.println("Speed of Car is: 200 km/h");
+    }
+}
+
+// Grandchild class (inherits Car)
+class SportsCar extends Car {
+    @Override
+    void showSpeed() {
+        super.showSpeed(); // Call Car's method
+        System.out.println("Speed of Sports Car is: 300 km/h");
+    }
+}
+
+// Main class
+public class Exp7b {
+    public static void main(String[] args) {
+        SportsCar sc = new SportsCar(); // Create SportsCar object
+        sc.showSpeed(); // Call method to display speeds
+    }
+}
