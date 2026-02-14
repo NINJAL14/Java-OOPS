@@ -1,0 +1,122 @@
+
+Theory: Interfaces in Java are abstract types that define a contract for classes to implement. They contain abstract methods (methods without body) that must be implemented by any class that implements the interface. Interfaces provide a way to achieve abstraction and multiple inheritance in Java. They define what a class must do, but not how it does it. This payment system demonstrates the use of interfaces where different payment methods (Credit Card and UPI) implement a common Payment interface. Each payment class provides its own implementation of the processPayment() method, showcasing polymorphism. The program also includes input validation using regular expressions to ensure data integrity. Key concepts demonstrated include: interface declaration, method overriding, polymorphism, encapsulation, and regular expression validation for credit card numbers (16 digits), CVV (3 digits), UPI IDs (must contain @), and mobile numbers (10 digits).
+*/
+
+import java.util.Scanner;
+
+// Payment Interface
+interface Payment {
+    void processPayment(double amount);
+}
+
+// CreditCardPayment Class
+class CreditCardPayment implements Payment {
+
+    private String cardNumber;
+    private String cardHolderName;
+    private String cvv;
+
+    public CreditCardPayment(String cardNumber, String cardHolderName, String cvv) {
+        this.cardNumber = cardNumber;
+        this.cardHolderName = cardHolderName;
+        this.cvv = cvv;
+    }
+
+    // Validation
+    private boolean validate() {
+        return cvv != null && cvv.matches("\\d{3}") && cardNumber.matches("\\d{16}");
+    }
+
+    @Override
+    public void processPayment(double amount) {
+        if (validate()) {
+            System.out.println("Processing Credit Card Payment of Rs. " + amount);
+            System.out.println("Card Holder: " + cardHolderName);
+            System.out.println("Payment Successful");
+        } else {
+            System.out.println("Invalid Credit Card details");
+        }
+    }
+}
+
+// UPIPayment Class
+class UPIPayment implements Payment {
+
+    private String upiId;
+    private String mobileNumber;
+
+    public UPIPayment(String upiId, String mobileNumber) {
+        this.upiId = upiId;
+        this.mobileNumber = mobileNumber;
+    }
+
+    // Validation
+    private boolean validate() {
+        return upiId != null && upiId.contains("@") && mobileNumber.matches("\\d{10}");
+    }
+
+    @Override
+    public void processPayment(double amount) {
+        if (validate()) {
+            System.out.println("Processing UPI Payment of Rs. " + amount);
+            System.out.println("UPI Id: " + upiId);
+            System.out.println("Payment Successful");
+        } else {
+            System.out.println("Invalid UPI details");
+        }
+    }
+}
+
+
+public class Exp8b {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Select Payment Method:");
+        System.out.println("1. Credit Card");
+        System.out.println("2. UPI");
+
+        int choice = sc.nextInt();
+        sc.nextLine(); 
+
+        System.out.print("Enter amount to pay: ");
+        double amount = sc.nextDouble();
+        sc.nextLine(); 
+
+        Payment payment = null;
+
+        switch (choice) {
+            case 1:
+                System.out.print("Enter Credit Card number (16 digits): ");
+                String cardNumber = sc.nextLine();
+
+                System.out.print("Enter Card Holder Name: ");
+                String name = sc.nextLine();
+
+                System.out.print("Enter CVV (3 digits): ");
+                String cvv = sc.nextLine();
+
+                payment = new CreditCardPayment(cardNumber, name, cvv);
+                break;
+
+            case 2:
+                System.out.print("Enter UPI ID: ");
+                String upiId = sc.nextLine();
+
+                System.out.print("Enter Mobile Number (10 digits): ");
+                String mobile = sc.nextLine();
+
+                payment = new UPIPayment(upiId, mobile);
+                break;
+
+            default:
+                System.out.println("Invalid choice");
+        }
+
+        if (payment != null) {
+            payment.processPayment(amount);
+        }
+
+        sc.close();
+    }
+}
