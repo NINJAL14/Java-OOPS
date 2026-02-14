@@ -1,0 +1,29 @@
+Theory: Temperature conversion is a fundamental mathematical operation used in various scientific and practical applications. The conversion from Celsius to Fahrenheit follows the formula: F = (C × 9/5) + 32, where F represents temperature in Fahrenheit and C represents temperature in Celsius. This program demonstrates the use of Java's Scanner class for interactive input, mathematical operations for formula implementation, and proper handling of double data type for decimal precision. Java's arithmetic operators (* for multiplication, / for division, + for addition) are utilized to perform the conversion calculation. The program also showcases proper resource management by closing the Scanner object to prevent memory leaks.
+*/
+
+// Importing Scanner class
+import java.util.Scanner;
+
+//Creating a Java class 
+public class Exp1c {
+    public static void main(String[] args) {
+        //variable declarations
+        Scanner sc = new Scanner(System.in);//object of Scanner class created
+        double celsius, fahrenheit;
+        
+        // Input temperature in Celsius from user
+        System.out.print("Enter temperature in Celsius: ");
+        celsius = sc.nextDouble();
+        
+        // Temperature conversion using mathematical formula
+        // Conversion formula: F = (C × 9/5) + 32
+        fahrenheit = (celsius * 9 / 5) + 32;
+        
+        // Display conversion result
+        System.out.println("Temperature in Celsius: " + celsius + "°C");
+        System.out.println("Temperature in Fahrenheit: " + fahrenheit + "°F");
+        
+        //closing Scanner object to free memory
+        sc.close();
+    }
+}
