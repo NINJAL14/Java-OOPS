@@ -1,0 +1,34 @@
+Theory: 
+In Java, variables and methods can be declared as either static (class-level) or non-static (instance-level). A static variable belongs to the class and is shared among all objects, while an instance variable belongs to a specific object. Static methods can be called without creating an object, whereas instance methods require object creation to be accessed. This experiment demonstrates how static and instance members behave differently in a Java program. The program includes a static variabl (num1), an instance variable (num2), a static method (staticDisplay), and a non-static method (simpleDisplay) to show their access and usage.
+*/
+
+public class Exp4c {
+    // Static variable - shared across all objects of the class
+    static int num1 = 40;
+    
+    // Instance variable - unique for each object
+    int num2 = 50;
+
+    // Instance method - can access both static and instance variables
+    void simpleDisplay() {
+        System.out.println("Static variable (num1): " + num1);
+        System.out.println("Instance variable (num2): " + num2);
+    }
+
+    // Static method - can only access static variables directly
+    static void staticDisplay() {
+        System.out.println("Static variable (num1): " + num1);
+    }
+
+    // Main method - program execution starts here
+    public static void main(String[] args) {
+        // Create an object of Exp4d to access instance members
+        Exp4c obj = new Exp4c();
+
+        // Calling instance method through object
+        obj.simpleDisplay();
+
+        // Calling static method using class name
+        Exp4c.staticDisplay();
+    }
+}
