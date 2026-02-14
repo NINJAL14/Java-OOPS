@@ -1,0 +1,77 @@
+Theory:
+In Java, constructor overloading allows a class to have multiple constructors with different parameter lists. This provides flexibility in object creation by initializing objects in different ways depending on the data provided. Constructors are special methods that are automatically invoked when an object is created. They have the same name as the class and do not have a return type. 
+
+In this program, the Student class demonstrates constructor overloading by 
+providing four constructors: 
+1. Default constructor (no arguments). 
+2. Constructor with roll number only. 
+3. Constructor with roll number and name. 
+4. Constructor with roll number, name, and department. 
+
+This allows objects to be created with varying levels of initialization.
+*/
+
+// Student class definition
+class Student {
+    int rollNumber;
+    String name;
+    String department;
+    
+    // Default constructor - assigns default values
+    Student() {
+        rollNumber = 0;
+        name = "Not Assigned";
+        department = "Not Assigned";
+    }
+    
+    // Constructor with roll number only
+    Student(int rollNumber) {
+        this.rollNumber = rollNumber;
+        this.name = "Not Assigned";
+        this.department = "Not Assigned";
+    }
+    
+    // Constructor with roll number and name
+    Student(int rollNumber, String name) {
+        this.rollNumber = rollNumber;
+        this.name = name;
+        this.department = "Not Assigned";
+    }
+    
+    // Constructor with all parameters
+    Student(int rollNumber, String name, String department) {
+        this.rollNumber = rollNumber;
+        this.name = name;
+        this.department = department;
+    }
+    
+    // Method to display student details
+    void display() {
+        System.out.println("Roll: " + rollNumber + ", Name: " + name + ", Dept: " + department);
+    }
+}
+
+// Main class to test constructor overloading
+public class Exp4b {
+    public static void main(String[] args) {
+        // Creating objects using different constructors
+        Student s1 = new Student();                                 // Default constructor
+        Student s2 = new Student(101);                              // Roll number only
+        Student s3 = new Student(102, "JISHAN");                    // Roll number and name
+        Student s4 = new Student(103, "NINJAL", "CSE");             // Roll, name, department
+        Student s5 = new Student(104, "AARAV", "IT");               // Full details
+        Student s6 = new Student(105, "SANA", "AIML");              // Full details
+        Student s7 = new Student(106, "OMKAR", "ECE");              // Full details
+        Student s8 = new Student(107, "FATIMA", "Mechanical");      // Full details
+        
+        // Displaying student information
+        s1.display();
+        s2.display();
+        s3.display();
+        s4.display();
+        s5.display();
+        s6.display();
+        s7.display();
+        s8.display();
+    }
+}
