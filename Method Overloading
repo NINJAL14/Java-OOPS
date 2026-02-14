@@ -1,0 +1,71 @@
+Theory: Method overloading is a key feature of Object-Oriented Programming that allows multiple methods with the same name but different parameter lists within the same class. This program demonstrates polymorphism through method overloading for area and volume calculations of various geometric shapes. The ShapeCalculator class contains overloaded methods for area() and volume() that handle different shapes based on the number and type of parameters passed. Mathematical formulas are implemented for geometric calculations: circle area (π×r²), rectangle area (length×breadth), square area (side²), triangle area (0.5×base×height), sphere volume (4/3×π×r³), cylinder volume (π×r²×h), cuboid volume (length×breadth×height), and cube volume (side³). The Math.PI constant provides precise value of π for accurate calculations. Boolean parameters are used to distinguish between similar method signatures, ensuring proper method selection during compilation.
+*/
+
+// Importing required packages
+// ShapeCalculator Class Definition
+class ShapeCalculator {
+    
+    // Method overloading for area calculations
+    
+    // Area of circle - takes radius parameter
+    public double area(double radius) {
+        return Math.PI * radius * radius;
+    }
+    
+    // Area of rectangle - takes length and breadth parameters
+    public double area(double length, double breadth) {
+        return length * breadth;
+    }
+    
+    // Area of square - takes side parameter, returns integer
+    public int area(int side) {
+        return side * side;
+    }
+    
+    // Area of triangle - takes base, height, and boolean flag parameters
+    public double area(double base, double height, boolean isTriangle) {
+        return 0.5 * base * height;
+    }
+    
+    // Method overloading for volume calculations
+    
+    // Volume of sphere - takes radius and boolean flag parameters
+    public double volume(double radius, boolean isSphere) {
+        return (4.0/3.0) * Math.PI * radius * radius * radius;
+    }
+    
+    // Volume of cylinder - takes radius and height parameters
+    public double volume(double radius, double height) {
+        return Math.PI * radius * radius * height;
+    }
+    
+    // Volume of cuboid - takes length, breadth, and height parameters
+    public double volume(double length, double breadth, double height) {
+        return length * breadth * height;
+    }
+    
+    // Volume of cube - takes side parameter, returns integer
+    public int volume(int side) {
+        return side * side * side;
+    }
+}
+
+// Test Class - Main class to demonstrate shape calculations
+public class Exp4a {
+    public static void main(String[] args) {
+        // Create ShapeCalculator object
+        ShapeCalculator obj = new ShapeCalculator();
+        
+        // Demonstrate area calculations using method overloading
+        System.out.println("Area of Circle = " + obj.area(10.0));
+        System.out.println("Area of Rectangle = " + obj.area(10.0, 20.0));
+        System.out.println("Area of Square = " + obj.area(5));
+        System.out.println("Area of Triangle = " + obj.area(10.0, 20.0, true));
+        
+        // Demonstrate volume calculations using method overloading
+        System.out.println("Volume of Sphere = " + obj.volume(3.0, true));
+        System.out.println("Volume of Cylinder = " + obj.volume(3.0, 7.0));
+        System.out.println("Volume of Cuboid = " + obj.volume(4.0, 5.0, 6.0));
+        System.out.println("Volume of Cube = " + obj.volume(3));
+    }
+}
