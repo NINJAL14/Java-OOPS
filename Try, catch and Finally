@@ -1,0 +1,58 @@
+Theory: Exception handling is a powerful mechanism in Java that allows programs to handle runtime errors gracefully without crashing. Exceptions are objects that represent abnormal conditions or errors that occur during program execution. Java provides a robust exception handling framework using try-catch-finally blocks. A try block contains code that might throw an exception, catch blocks handle specific types of exceptions, and finally block executes regardless of whether an exception occurred or not. Custom exceptions can be created by extending the Exception class, allowing developers to define application-specific error conditions. This program demonstrates custom exception creation (InvalidAgeException), built-in exception handling (InputMismatchException for invalid input types), throw keyword for explicitly throwing exceptions, multiple catch blocks for handling different exception types, finally block for cleanup operations, and input validation loops to ensure correct data entry. The program validates age eligibility (18 or above) and handles both invalid data types and business logic violations effectively.
+*/
+
+// Importing required packages for exception handling and input
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+// Custom Exception Class - InvalidAgeException
+class InvalidAgeException extends Exception {
+    // Constructor to initialize exception with custom message
+    public InvalidAgeException(String Message) {
+        super(Message); // Call parent Exception class constructor
+    }
+}
+
+// Main class to demonstrate exception handling
+public class Exp9b {
+    public static void main(String[] args) {
+        // Variable declarations and Scanner object creation
+        Scanner sc = new Scanner(System.in);
+        boolean valid = false; // Flag to control validation loop
+        
+        // Loop continues until valid age is entered
+        while (!valid) {
+            try {
+                // Input age from user
+                System.out.print("Enter your age : ");
+                int age = sc.nextInt();
+                
+                // Business logic validation - check if age is below 18
+                if (age < 18) {
+                    // Throw custom exception for underage
+                    throw new InvalidAgeException("Age must be 18 or above to proceed.");
+                }
+                
+                // If age is valid, display success message
+                System.out.println("Age accepted : You are eligible !");
+                valid = true; // Set flag to exit loop
+                
+            } catch (InputMismatchException e) {
+                // Handle invalid input type (non-integer values)
+                System.out.println("Invalid Input ! please enter a valid Integer.");
+                sc.nextLine(); // Clear input buffer
+                
+            } catch (InvalidAgeException e) {
+                // Handle custom exception for invalid age
+                System.out.println("Error : " + e.getMessage());
+                
+            } finally {
+                // Finally block - executes regardless of exception occurrence
+                System.out.println("Attempt completed.");
+            }
+        }
+        
+        // Close Scanner object to prevent resource leak
+        sc.close();
+    }
+}
