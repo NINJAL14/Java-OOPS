@@ -1,0 +1,119 @@
+Theory: Access modifiers in Java are keywords that set the accessibility or scope of classes, methods, and variables. Java provides four types of access modifiers: default (package-private), private, protected, and public. The default modifier (no keyword) allows access within the same package only. The private modifier restricts access to within the same class only, providing the highest level of encapsulation. The protected modifier allows access within the same package and by subclasses in other packages through inheritance. The public modifier provides unrestricted access from any class in any package. Access modifiers are fundamental to encapsulation, one of the four pillars of Object-Oriented Programming, as they control data hiding and protect sensitive information. Understanding access modifiers is crucial for designing secure and maintainable applications with proper encapsulation boundaries. This program demonstrates all four access modifiers through multiple examples showing successful and erroneous access patterns across different packages, inheritance-based access for protected members, and the concept of package organization in Java applications.
+*/
+
+// ========================================================================================
+// EXAMPLE 1: DEFAULT ACCESS MODIFIER
+// ========================================================================================
+
+// Package p1 - contains class with default access modifier
+package p1;
+
+// Class Test with default access modifier (no keyword specified)
+class Test {
+    // Method with default access - accessible only within package p1
+    void display() {
+        System.out.println("Hello World!");
+    }
+}
+
+// Package p2 - attempting to access default class from different package
+package p2;
+import p1.*; // Importing package p1
+
+// This will cause compilation error
+class Test1 {
+    public static void main(String args[]) {
+        // ERROR: Cannot access class Test from package p1
+        // Default modifier restricts access to same package only
+        Test obj = new Test(); // Compilation Error
+        obj.display();
+    }
+}
+
+// ========================================================================================
+// EXAMPLE 2: PRIVATE ACCESS MODIFIER
+// ========================================================================================
+
+// Package p1 - contains class with private method
+package p1;
+
+// Class A with private method
+class A {
+    // Private method - accessible only within class A
+    private void display() {
+        System.out.println("private method.....");
+    }
+}
+
+// Package p2 - attempting to access private method from different package
+package p2;
+import p1.*;
+
+class B {
+    public static void main(String args[]) {
+        A obj = new A();
+        
+        // ERROR: Cannot access private method from outside class
+        // Private modifier restricts access to same class only
+        obj.display(); // Compilation Error
+    }
+}
+
+// ========================================================================================
+// EXAMPLE 3: PROTECTED ACCESS MODIFIER
+// ========================================================================================
+
+// Package p1 - contains class with protected method
+package p1;
+
+// Class A must be public to be accessible from other packages
+public class A {
+    // Protected method - accessible within package and by subclasses
+    protected void display() {
+        System.out.println("protected method...");
+    }
+}
+
+// Package p2 - accessing protected method through inheritance
+package p2;
+import p1.*;
+
+// Class B extends A - inherits protected members
+class B extends A {
+    public static void main(String args[]) {
+        // Create object of subclass B
+        B obj = new B();
+        
+        // SUCCESS: Can access protected method through inheritance
+        obj.display(); // Works successfully
+    }
+}
+
+// ========================================================================================
+// EXAMPLE 4: PUBLIC ACCESS MODIFIER
+// ========================================================================================
+
+// Package p1 - contains class with public method
+package p1;
+
+// Public class - accessible from any package
+public class A {
+    // Public method - accessible from anywhere
+    public void display() {
+        System.out.println("public method..");
+    }
+}
+
+// Package p2 - accessing public method from different package
+package p2;
+import p1.*;
+
+class B {
+    public static void main(String args[]) {
+        // Create object of class A
+        A obj = new A();
+        
+        // SUCCESS: Can access public method from any package
+        obj.display(); // Works successfully
+    }
+}
