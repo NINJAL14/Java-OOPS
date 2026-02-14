@@ -1,0 +1,37 @@
+Theory: Conditional statements are fundamental control structures in programming that allow programs to make decisions based on different conditions. This program demonstrates nested if-else statements and logical operators to classify numbers as "Weird" or "Not Weird" based on specific rules. The modulus operator (%) is used to determine if a number is odd or even by checking if the remainder when divided by 2 is zero. The classification logic follows these rules: all odd numbers are "Weird", even numbers between 2-5 are "Not Weird", even numbers between 6-20 are "Weird", and even numbers greater than 20 are "Not Weird". Nested conditional statements allow for complex decision-making processes where multiple conditions are evaluated in a hierarchical manner. The Scanner class enables interactive input from users, and proper input buffer clearing using nextLine() prevents input-related issues in console applications.
+*/
+
+// Importing Scanner class for user input
+import java.util.Scanner;
+
+// Creating main class
+public class Exp2a {
+    public static void main(String[] args) {
+        // Variable declarations and Scanner object creation
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a Number: ");
+        int n = sc.nextInt();
+        sc.nextLine(); // Clear input buffer
+        
+        // Primary condition: Check if number is odd
+        if (n % 2 != 0) {
+            // All odd numbers are classified as "Weird"
+            System.out.println("Weird");
+        } else {
+            // Secondary conditions for even numbers
+            if (n >= 2 && n <= 5) {
+                // Even numbers between 2-5 are "Not Weird"
+                System.out.println("Not Weird");
+            } else if (n >= 6 && n <= 20) {
+                // Even numbers between 6-20 are "Weird"
+                System.out.println("Weird");
+            } else {
+                // Even numbers greater than 20 are "Not Weird"
+                System.out.println("Not Weird");
+            }
+        }
+        
+        // Close Scanner object to prevent resource leak
+        sc.close();
+    }
+}
