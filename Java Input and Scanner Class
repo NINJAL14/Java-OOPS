@@ -1,0 +1,86 @@
+Theory: Java is a popular programming language, created in 1995. It is owned by Oracle, 
+ and it is used for Mobile applications, Desktop applications, Web applications, Games, 
+ Database connection. Java works on different platforms. Object oriented, platform 
+ independent, simple, secure, portable, robust, multithreaded, interpreted, distributed 
+ are some important features of Java. It is easy to learn and simple to use. It is 
+ open-source and free. Java is an object oriented language which gives a clear structure 
+ to programs and allows code to be reused, lowering development costs. It supports 
+ primitive data types which includes byte, short, int, long, float, double, boolean, char 
+ and non-primitive data types such as String, Arrays and Classes.
+*/
+
+// Importing Scanner class
+import java.util.Scanner;
+
+// Creating a Java class 
+public class Exp1a {
+    public static void main(String[] args) {
+        // variable declarations    
+        String sname;
+        int rollno;
+        double cgpa;
+
+        Scanner sc = new Scanner(System.in); // object of Scanner class created
+        
+        try {
+            // Input student information with proper prompts
+            System.out.print("Enter your full name: ");
+            sname = sc.nextLine();
+            
+            System.out.print("Enter your roll number: ");
+            rollno = sc.nextInt();
+            
+            System.out.print("Enter your CGPA score (0.0 - 10.0): ");
+            cgpa = sc.nextDouble();
+            
+            // Input validation for CGPA
+            if (cgpa < 0.0 || cgpa > 10.0) {
+                System.out.println("ERROR: CGPA should be between 0.0 and 10.0");
+                return;
+            }
+            
+            // Input validation for roll number
+            if (rollno <= 0) {
+                System.out.println("ERROR: Roll number should be a positive integer");
+                return;
+            }
+            
+            // Input validation for name
+            if (sname.trim().isEmpty()) {
+                System.out.println("ERROR: Name cannot be empty");
+                return;
+            }
+            
+            // Displaying variable values with proper formatting
+            System.out.println("\n===== STUDENT INFORMATION =====");
+            System.out.println("Name: " + sname);
+            System.out.println("Roll No: " + rollno);
+            System.out.printf("CGPA Score: %.2f\n", cgpa);
+            
+            // Additional CGPA grade classification
+            String grade;
+            if (cgpa >= 9.0) {
+                grade = "Outstanding (O)";
+            } else if (cgpa >= 8.0) {
+                grade = "Excellent (A+)";
+            } else if (cgpa >= 7.0) {
+                grade = "Very Good (A)";
+            } else if (cgpa >= 6.0) {
+                grade = "Good (B+)";
+            } else if (cgpa >= 5.0) {
+                grade = "Average (B)";
+            } else if (cgpa >= 4.0) {
+                grade = "Below Average (C)";
+            } else {
+                grade = "Poor (F)";
+            }
+            
+            System.out.println("Grade: " + grade);
+            
+        } catch (Exception e) {
+            System.out.println("ERROR: Invalid input format. Please enter the correct data type.");
+        } finally {
+            sc.close(); // closing scanner object to free memory
+        }
+    }
+}
