@@ -1,0 +1,49 @@
+Theory: Exception handling is a crucial feature in Java that enables programs to handle runtime errors and exceptional conditions gracefully. This program demonstrates handling of two common exceptions: ArithmeticException (occurs during division by zero) and InputMismatchException (occurs when input type doesn't match expected type). The try-with-resources statement automatically manages resource cleanup by closing the Scanner object when the try block completes, eliminating the need for explicit close() calls. The program uses a validation loop that continues until successful division occurs, ensuring robust user interaction. Multiple catch blocks allow handling different exception types with appropriate error messages. The finally block executes regardless of whether an exception occurred, making it ideal for cleanup operations or logging. Key concepts demonstrated include: try-with-resources for automatic resource management, multiple catch blocks for different exception types, ArithmeticException for mathematical errors, InputMismatchException for type validation, input buffer clearing after invalid input, and finally block for guaranteed execution of critical code sections.
+*/
+
+// Importing required packages for exception handling and input
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+// Main class to demonstrate division with exception handling
+public class Exp9a {
+    public static void main(String[] args) {
+        // Try-with-resources statement - automatically closes Scanner
+        try (Scanner sc = new Scanner(System.in)) {
+            boolean success = false; // Flag to control validation loop
+            
+            // Loop continues until successful division operation
+            while (!success) {
+                try {
+                    // Input first number from user
+                    System.out.println("Enter First Number: ");
+                    int num1 = sc.nextInt();
+                    
+                    // Input second number from user
+                    System.out.println("Enter Second Number: ");
+                    int num2 = sc.nextInt();
+                    
+                    // Perform division - may throw ArithmeticException if num2 is 0
+                    int result = num1 / num2;
+                    
+                    // Display result if division successful
+                    System.out.println("Result: " + result);
+                    success = true; // Set flag to exit loop
+                    
+                } catch (ArithmeticException e) {
+                    // Handle division by zero error
+                    System.out.println("Division By Zero is Not allowed.");
+                    
+                } catch (InputMismatchException e) {
+                    // Handle invalid input type error
+                    System.out.println("Enter Integer Value.");
+                    sc.nextLine(); // Clear input buffer
+                    
+                } finally {
+                    // Finally block - executes after every attempt
+                    System.out.println("Finally Block Executed...");
+                }
+            }
+        }
+    }
+}
