@@ -1,0 +1,80 @@
+Theory:
+Inheritance is an important feature of Object-Oriented Programming (OOP) that 
+allows a class (child/subclass) to inherit the properties and behaviors of 
+another class (parent/superclass). This promotes reusability and extensibility.  
+
+In this program: 
+- The `Employee` class is the parent class containing employee details and a 
+  method to calculate yearly salary.  
+- The `Manager` class extends `Employee` (child class) and inherits all its 
+  members while adding its own property (department) and methods.  
+- Method overriding is used in `Manager` to customize the display of details.  
+*/
+
+// Employee Class (Parent)
+class Employee {
+    String name;
+    int E_Id;
+    double E_Sal;
+
+    // Constructor
+    Employee(String name, int E_Id, double E_Sal) {
+        this.name = name;
+        this.E_Id = E_Id;
+        this.E_Sal = E_Sal;
+    }
+
+    // Method to display employee details
+    void displayDetails() {
+        System.out.println("Employee Name: " + name);
+        System.out.println("Employee Id: " + E_Id);
+        System.out.println("Employee Salary: ₹" + E_Sal);
+    }
+
+    // Method to calculate annual salary
+    double calculateYearlySalary() {
+        return E_Sal * 12;
+    }
+}
+
+// Manager Class (Child) - Inherits from Employee
+class Manager extends Employee {
+    String department;
+
+    // Constructor
+    Manager(String name, int E_Id, double E_Sal, String department) {
+        super(name, E_Id, E_Sal); // Call to parent constructor
+        this.department = department;
+    }
+
+    // Overriding method to display manager details
+    @Override
+    void displayDetails() {
+        super.displayDetails(); // Call parent class method
+        System.out.println("Department: " + department);
+    }
+
+    // Additional method specific to Manager
+    void conductMeeting() {
+        System.out.println(name + " is conducting a meeting for the " + department + " department.");
+    }
+}
+
+// Main class
+public class Exp7a {
+    public static void main(String[] args) {
+        // Create Employee object
+        Employee emp = new Employee("Ravi", 1000, 30000);
+        emp.displayDetails();
+        System.out.println("Yearly Salary: ₹" + emp.calculateYearlySalary());
+
+        System.out.println();
+
+        // Create Manager object
+        Manager mgr = new Manager("Ninjal", 2000, 5000000, "Computer");
+        System.out.println("== Manager Details ==");
+        mgr.displayDetails();
+        System.out.println("Yearly Salary: ₹" + mgr.calculateYearlySalary());
+        mgr.conductMeeting();
+    }
+}
