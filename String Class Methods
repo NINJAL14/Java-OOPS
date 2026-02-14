@@ -1,0 +1,30 @@
+Theory:
+In Java, the String class is an immutable sequence of characters, meaning that once a String object is created, its value cannot be changed. The String class provides many built-in methods to perform operations like finding length, changing case, extracting substrings, concatenation, searching, comparison, and replacement. This experiment demonstrates the usage of some commonly used String methods including length(), toUpperCase(), toLowerCase(), substring(), charAt(), concat(), indexOf(), equals(), equalsIgnoreCase(), and replace(). These methods help in efficient string manipulation in Java.
+*/
+
+public class Exp5a {
+    public static void main(String[] args) {
+        // String initialization
+        String s1 = "NINJAL";
+
+        // Displaying various String operations
+        System.out.println("Length of s1: " + s1.length());
+        System.out.println("Uppercase: " + s1.toUpperCase());
+        System.out.println("Lowercase: " + "NINJAL".toLowerCase());
+        System.out.println("Substring from index 1: " + s1.substring(1));
+        System.out.println("Substring from 0 to 5: " + s1.substring(0,5));
+        System.out.println("Character at index 0: " + s1.charAt(0));
+        System.out.println("Concatenation: " + s1.concat(" PARDESHI"));
+        System.out.println("Index of 'N': " + s1.indexOf('N'));
+        System.out.println("Index of \"PARDESHI\": " + "NINJAL PARDESHI".indexOf("PARDESHI"));
+        System.out.println("Equals \"Ninjal\": " + s1.equals("Ninjal"));
+        System.out.println("Equals \"Pardeshi\": " + s1.equals("Pardeshi"));
+        System.out.println("Equals \"NINJAL\": " + s1.equals("NINJAL"));
+        System.out.println("EqualsIgnoreCase \"NINJAL\": " + s1.equalsIgnoreCase("NINJAL"));
+        System.out.println("Replace 'N' with 'K': " + s1.replace('N', 'K'));
+
+        // Another string example for replace()
+        String s2 = "I am learning JAVA";
+        System.out.println("After replace: " + s2.replace("JAVA", "Python"));
+    }
+}
