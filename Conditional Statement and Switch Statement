@@ -1,0 +1,90 @@
+Theory: Academic grading systems are essential for evaluating student performance in educational institutions. This program demonstrates the implementation of a comprehensive grading system that calculates total marks, average, and percentage from five subject marks. The program uses conditional statements (if-else if-else) for grade assignment based on average marks and switch statements for performance evaluation. Java's Scanner class enables interactive input, while float and String data types handle numerical calculations and text storage respectively. The grading scale typically follows: A (90-100) - Excellent, B (80-89) - Very Good, C (70-79) - Good, D (60-69) - Satisfactory, E (below 60) - Needs Improvement. Input validation ensures marks are within the valid range (0-100).
+*/
+
+// Importing Scanner class
+import java.util.Scanner;
+
+//Creating a Java class 
+public class Exp2b {
+    public static void main(String[] args) {
+        //variable declarations
+        int rollno;
+        float sub1, sub2, sub3, sub4, sub5, totalmarks = 0, avg = 0, percent = 0;
+        String sname, grade;
+        Scanner sc = new Scanner(System.in);//object of Scanner class created
+        
+        //input student details
+        System.out.println("Enter roll no of student : ");
+        rollno = sc.nextInt();
+        sc.nextLine();
+        
+        System.out.println("Enter name of student : ");
+        sname = sc.nextLine();
+        
+        //input marks for five subjects
+        System.out.println("Enter Marks of five subjects");
+        sub1 = sc.nextFloat();
+        sub2 = sc.nextFloat();
+        sub3 = sc.nextFloat();
+        sub4 = sc.nextFloat();
+        sub5 = sc.nextFloat();
+        
+        //validation for marks range and calculations
+        if (sub1 <= 100 && sub2 <= 100 && sub3 <= 100 && sub4 <= 100 && sub5 <= 100) {
+            //calculating total marks, average, and percentage
+            totalmarks = sub1 + sub2 + sub3 + sub4 + sub5;
+            avg = totalmarks / 5;
+            percent = (totalmarks / 500) * 100;
+        } else {
+            System.out.println("Please Enter marks less than 100");
+        }
+        
+        //grade assignment based on average marks
+        if (avg >= 90 && avg <= 100) {
+            grade = "A";
+        } else if (avg >= 80 && avg <= 89) {
+            grade = "B";
+        } else if (avg >= 70 && avg <= 79) {
+            grade = "C";
+        } else if (avg >= 60 && avg <= 69) {
+            grade = "D";
+        } else {
+            grade = "E";
+        }
+        
+        //displaying student results
+        System.out.println("Name : " + sname);
+        System.out.println("Roll No. : " + rollno);
+        System.out.println("Total Marks : " + totalmarks);
+        System.out.println("Average Marks : " + avg);
+        System.out.println("Grade : " + grade);
+        System.out.println("Percentage : " + percent);
+        
+        //performance evaluation using switch statement
+        switch (grade) {
+            case "A":
+                System.out.println("Excellent");
+                break;
+                
+            case "B":
+                System.out.println("Very Good");
+                break;
+                
+            case "C":
+                System.out.println("Good");
+                break;
+                
+            case "D":
+                System.out.println("Satisfactory");
+                break;
+                
+            case "E":
+                System.out.println("Needs Improvement");
+                break;
+                
+            default:
+                System.out.println("Invalid Grade");
+        }
+        sc.close();//closing scanner object to free memory
+    }
+}
