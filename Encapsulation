@@ -1,0 +1,68 @@
+Theory: Object-Oriented Programming (OOP) is a fundamental programming paradigm that uses objects and classes to structure software programs. This program demonstrates key OOP concepts including encapsulation (data hiding using private variables), abstraction (through public methods), and method implementation for real-world banking operations. The Bank_account class encapsulates account details like balance and account number, while providing public methods for accessing and modifying these attributes safely. Banking operations include deposit (adding money), withdrawal (with balance validation), and balance inquiry. Getter and setter methods follow Java naming conventions and provide controlled access to private class variables. The 'this' keyword is used to distinguish between instance variables and method parameters, ensuring proper data manipulation and maintaining object state integrity.
+*/
+
+// Bank Account Class Definition
+class Bank_account {
+    // Private instance variables for encapsulation
+    private double balance;
+    private String account_number;
+    
+    // Getter method for balance - returns current account balance
+    public double getBalance() {
+        return balance;
+    }
+    
+    // Setter method for balance - sets account balance
+    public void setBalance(float balance) {
+        this.balance = balance;
+    }
+    
+    // Getter method for account number - returns account number
+    public String getAccount_number() {
+        return account_number;
+    }
+    
+    // Setter method for account number - sets account number
+    public void setAccount_number(String account_number) {
+        this.account_number = account_number;
+    }
+    
+    // Withdraw method - handles money withdrawal with balance validation
+    public void withdraw(double wamount) {
+        // Check if sufficient balance is available
+        if (balance < wamount) {
+            System.out.println("Insufficient balance");
+        } else {
+            // Deduct withdrawal amount from balance
+            balance = balance - wamount;
+            System.out.println("Balance after withdraw : " + balance);
+        }
+    }
+    
+    // Deposit method - handles money deposit to account
+    public void deposit(double damount) {
+        // Add deposit amount to current balance
+        balance = balance + damount;
+        System.out.println("Balance after deposit : " + balance);
+    }
+}
+
+// Test Class - Main class to test Bank Account functionality
+public class Exp3a {
+    public static void main(String[] args) {
+        // Create Bank_account object
+        Bank_account obj = new Bank_account();
+        
+        // Set initial account details using setter methods
+        obj.setBalance(1000);  // Set initial balance to 1000
+        obj.setAccount_number("7652469752");  // Set account number
+        
+        // Display account information using getter methods
+        System.out.println("Account Number: " + obj.getAccount_number());
+        System.out.println("Initial Balance: " + obj.getBalance());
+        
+        // Perform banking operations
+        obj.deposit(800);    // Deposit 800 rupees
+        obj.withdraw(400);   // Withdraw 400 rupees
+    }
+}
