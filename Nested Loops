@@ -1,0 +1,92 @@
+Theory: Pattern programming is a fundamental concept in programming that helps develop logical thinking and understanding of nested loops. These programs demonstrate three different pattern types: sequential number pattern, star-number pattern with modulus operation, and arithmetic progression pattern. Nested loops are used where the outer loop controls rows and inner loop controls columns/elements in each row. The modulus operator (%) is used to create alternating patterns, input validation ensures proper range checking, and counter variables help track and display sequential numbers. Java's nested for loops, conditional statements (if-else), and arithmetic operations are effectively utilized to create visually appealing patterns that enhance programming logic and mathematical understanding.
+*/
+
+// Importing Scanner class
+import java.util.Scanner;
+
+//Program 1: Sequential Number Pattern
+public class Exp2c {
+    public static void main(String[] args) {
+        //variable declarations
+        int rows;
+        int count = 1; //counter for sequential numbering
+        Scanner sc = new Scanner(System.in);//object of Scanner class created
+        
+        //input number of rows
+        System.out.println("Enter Number of Rows : ");
+        rows = sc.nextInt();
+        
+        //nested loops to create sequential number pattern
+        for (int i = 1; i <= rows; i++) {
+            for (int j = 1; j <= i; j++) {
+                //condition to print star or number based on count
+                if (count % 5 == 0) {
+                    System.out.print("* ");
+                } else {
+                    System.out.print(count + " ");
+                }
+                count++; //increment counter
+            }
+            System.out.println(); //move to next line after each row
+        }
+    }
+}
+
+//Program 2: Star-Number Pattern with Input Validation
+/* 
+public class Exp2c {
+    public static void main(String[] args) {
+        //variable declarations
+        int rows;
+        int count = 1; //counter for pattern generation
+        Scanner sc = new Scanner(System.in);//object of Scanner class created
+        
+        //input number of rows with validation
+        System.out.println("Enter Number of Rows : ");
+        rows = sc.nextInt();
+        
+        //input validation for rows range (1-20)
+        if (rows >= 1 && rows <= 20) {
+            //nested loops to create star-number pattern
+            for (int i = 1; i <= rows; i++) {
+                for (int j = 1; j <= i; j++) {
+                    //condition to alternate between star and number
+                    if (count % 5 == 0) {
+                        System.out.print("* ");
+                    } else {
+                        System.out.print(count + " ");
+                    }
+                    count++; //increment counter
+                }
+                System.out.println(); //move to next line after each row
+            }
+        } else {
+            //error message for invalid input
+            System.out.println("Please Enter a Number between 1 to 20.");
+        }
+    }
+}
+
+//Program 3: Arithmetic Progression Pattern
+public class Exp2c {
+    public static void main(String[] args) {
+        //variable declarations
+        int rows;
+        int count = 1; //starting number for arithmetic progression
+        Scanner sc = new Scanner(System.in);//object of Scanner class created
+        
+        //input number of rows
+        System.out.println("Enter Number of Rows : ");
+        rows = sc.nextInt();
+        
+        //nested loops to create arithmetic progression pattern
+        for (int i = 1; i <= rows; i++) {
+            for (int j = 1; j <= i; j++) {
+                //print current count value
+                System.out.print(" " + count);
+                count = count + 2; //increment by 2 for arithmetic progression
+            }
+            System.out.println(); //move to next line after each row
+        }
+    }
+}
